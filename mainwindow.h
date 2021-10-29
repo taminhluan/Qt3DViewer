@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "OpenGLWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,7 +21,10 @@ private slots:
 
     void on_actionQuit_triggered();
 
+    void on_lineEditBackgroundColor_editingFinished();
+
 private:
     Ui::MainWindow *ui;
+    OpenGLWidget openGLWidget;
 };
 #endif // MAINWINDOW_H
