@@ -1,5 +1,11 @@
 #include "OpenGLWidget.h"
 #include <QDebug>
+#include <fstream>
+#include <sstream>
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
+
+#include <PerspectiveCamera.h>
 
 // constructor
 OpenGLWidget::OpenGLWidget(QWidget *parent): QOpenGLWidget(parent) {
@@ -19,9 +25,10 @@ void OpenGLWidget::initializeGL() {
     // shader
     const char *vertexShaderSource = "#version 330 core\n"
             "layout (location = 0) in vec3 aPos;\n"
+            "uniform mat4 MVP;\n"
             "void main()\n"
             "{\n"
-            "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+            "   gl_Position = MVP * vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
             "}\0";
     const char *fragmentShaderSource = "#version 330 core\n"
             "out vec4 FragColor;\n"
@@ -34,6 +41,15 @@ void OpenGLWidget::initializeGL() {
     m_program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexShaderSource);
     m_program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentShaderSource);
     m_program->link();
+
+    MatrixID = f->glGetUniformLocation(m_program->programId(), "MVP");
+
+    camera = new PerspectiveCamera(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+
+    // Model matrix : an identity matrix (model will be at the origin)
+    glm::mat4 Model = glm::mat4(1.0f);
+    // Our ModelViewProjection : multiplication of our 3 matrices
+    MVP = camera->getProjectionMatrix() * Model; // Remember, matrix multiplication is the other way around
 
     // vertices
     float vertices[] = {
@@ -54,20 +70,25 @@ void OpenGLWidget::initializeGL() {
 
     f->glEnableVertexAttribArray(0);
     f->glBindBuffer(GL_ARRAY_BUFFER, 0);
-    //
+
     f->glClearColor(0.2, 0.3, 0.3, 1.0);
 }
 
-void OpenGLWidget::resizeGL(int w, int h){
-
+void OpenGLWidget::resizeGL(int w, int h) {
 
 }
 void OpenGLWidget::paintGL() {
+    qInfo() << "paintGL update";
+
     f->glClearColor(this->background_color_red, this->background_color_green, this->background_color_blue, 1.0f);
     f->glClear(GL_COLOR_BUFFER_BIT);
 
+    {
+        this->m_program->bind();
 
-    this->m_program->bind();
-    f->glBindVertexArray(VAO);
-    f->glDrawArrays(GL_TRIANGLES, 0, 3);
+        f->glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &camera->getProjectionMatrix()[0][0]);
+
+        f->glBindVertexArray(VAO);
+        f->glDrawArrays(GL_TRIANGLES, 0, 3);
+    }
 }

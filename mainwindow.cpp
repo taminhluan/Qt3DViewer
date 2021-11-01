@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // show full screen
+    this->showMaximized();
 
     { // show openGLWidget
         QSurfaceFormat format;
@@ -19,9 +21,13 @@ MainWindow::MainWindow(QWidget *parent)
         format.setProfile(QSurfaceFormat::CoreProfile);
 
         // set format
-        openGLWidget.show();
-        openGLWidget.activateWindow();
+        openGLWidget = new OpenGLWidget();
+        openGLWidget->show();
+        openGLWidget->activateWindow();
     }
+
+    // we need QWidget*
+    setCentralWidget(openGLWidget);
 }
 
 MainWindow::~MainWindow()
@@ -74,7 +80,10 @@ void MainWindow::on_lineEditBackgroundColor_editingFinished()
 
     }
 
-    this->openGLWidget.setBackgroundColor(red, green, blue);
-    this->openGLWidget.activateWindow();
+    this->openGLWidget->setBackgroundColor(red, green, blue);
+
+    // change background didn't work
+    // we need call update function()
+    this->openGLWidget->update();
 }
 

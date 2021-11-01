@@ -25,6 +25,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    OpenGLWidget openGLWidget;
+    OpenGLWidget *openGLWidget;
 };
 #endif // MAINWINDOW_H

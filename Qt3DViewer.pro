@@ -12,12 +12,14 @@ CONFIG += c++11
 
 SOURCES += \
     OpenGLWidget.cpp \
+    PerspectiveCamera.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     OpenGLWidget.h \
-    mainwindow.h
+    PerspectiveCamera.h \
+    mainwindow.h \
 
 FORMS += \
     mainwindow.ui
@@ -29,3 +31,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+
+INCLUDEPATH = external/glm
