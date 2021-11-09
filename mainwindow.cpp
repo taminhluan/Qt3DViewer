@@ -87,3 +87,60 @@ void MainWindow::on_lineEditBackgroundColor_editingFinished()
     this->openGLWidget->update();
 }
 
+void MainWindow::on_CameraChanged() {
+    qDebug() << "on Camera Changed";
+
+    // update UI information
+    ui->lineEditCameraPositionX->setText( QString::number(openGLWidget->camera->position.x) );
+    ui->lineEditCameraPositionY->setText( QString::number(openGLWidget->camera->position.y) );
+    ui->lineEditCameraPositionZ->setText( QString::number(openGLWidget->camera->position.z) );
+
+    ui->lineEditCameraTargetX->setText( QString::number(openGLWidget->camera->target.x) );
+    ui->lineEditCameraTargetY->setText( QString::number(openGLWidget->camera->target.y) );
+    ui->lineEditCameraTargetZ->setText( QString::number(openGLWidget->camera->target.z) );
+
+    ui->lineEditCameraFOV->setText( QString::number(openGLWidget->camera->m_fov) );
+    ui->lineEditCameraNear->setText( QString::number(openGLWidget->camera->m_near) );
+    ui->lineEditCameraFar->setText( QString::number(openGLWidget->camera->m_far) );
+}
+
+void MainWindow::onBackgroundChanged() {
+    QColor *color = new QColor(openGLWidget->background_color_red * 255,
+           openGLWidget->background_color_green * 255,
+           openGLWidget->background_color_blue * 255);
+
+
+    ui->lineEditBackgroundColor->setText( color->name(color->HexRgb) );
+}
+
+void MainWindow::on_pushButtonUpdateCamera_clicked()
+{
+    qDebug() << "Update projection matrix";
+
+    float cameraPositionX = ui->lineEditCameraPositionX->text().toFloat();
+    float cameraPositionY = ui->lineEditCameraPositionY->text().toFloat();
+    float cameraPositionZ = ui->lineEditCameraPositionZ->text().toFloat();
+
+    float cameraTargetX = ui->lineEditCameraTargetX->text().toFloat();
+    float cameraTargetY = ui->lineEditCameraTargetY->text().toFloat();
+    float cameraTargetZ = ui->lineEditCameraTargetZ->text().toFloat();
+
+    float cameraFOV = ui->lineEditCameraFOV->text().toFloat();
+    float cameraNear= ui->lineEditCameraNear->text().toFloat();
+    float cameraFar = ui->lineEditCameraFar->text().toFloat();
+
+    openGLWidget->camera->position.x = cameraPositionX;
+    openGLWidget->camera->position.y = cameraPositionY;
+    openGLWidget->camera->position.z = cameraPositionZ;
+
+    openGLWidget->camera->target.x = cameraTargetX;
+    openGLWidget->camera->target.y = cameraTargetY;
+    openGLWidget->camera->target.z = cameraTargetZ;
+
+    openGLWidget->camera->m_fov = cameraFOV;
+    openGLWidget->camera->m_near = cameraNear;
+    openGLWidget->camera->m_far = cameraFar;
+
+    openGLWidget->camera->updateProjectionMatrix();
+}
+

@@ -13,8 +13,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    OpenGLWidget *openGLWidget;
+
+public slots:
+    void on_CameraChanged();
+    void onBackgroundChanged();
 
 private slots:
     void on_actionOpen_triggered();
@@ -23,8 +28,10 @@ private slots:
 
     void on_lineEditBackgroundColor_editingFinished();
 
+    void on_pushButtonUpdateCamera_clicked();
+
 private:
     Ui::MainWindow *ui;
-    OpenGLWidget *openGLWidget;
+
 };
 #endif // MAINWINDOW_H
