@@ -44,9 +44,10 @@ void OpenGLWidget::initializeGL() {
     }
 
     this->triangleExample = new TriangleExample(f, camera);
-    this->triangleExample->setup();
+//    this->triangleExample->setup();
 
-    this->pointsExample = new PointsExample(f);
+    this->pointsExample = new PointsExample(f, camera);
+//    this->pointsExample->setup();
     this->cubeExample = new CubeExample(f);
 }
 
@@ -59,7 +60,8 @@ void OpenGLWidget::paintGL() {
     f->glClearColor(this->background_color_red, this->background_color_green, this->background_color_blue, 1.0f);
     f->glClear(GL_COLOR_BUFFER_BIT);
 
-    this->triangleExample->draw();
+//    this->triangleExample->draw();
+    this->pointsExample->draw();
 }
 
 void OpenGLWidget::onCameraChanged() {

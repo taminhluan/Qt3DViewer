@@ -11,6 +11,10 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    3d/io/BinReader.cpp \
+    3d/io/BinWriter.cpp \
+    3d/io/LasReader.cpp \
+    3d/io/PCLTextReader.cpp \
     3d/tmp/CubeExample.cpp \
     3d/tmp/PointsExample.cpp \
     3d/tmp/TriangleExample.cpp \
@@ -24,6 +28,10 @@ SOURCES += \
 
 HEADERS += \
     3d/core/Object3D.h \
+    3d/io/BinReader.h \
+    3d/io/BinWriter.h \
+    3d/io/LasReader.h \
+    3d/io/PCLTextReader.h \
     3d/tmp/CubeExample.h \
     3d/tmp/PointsExample.h \
     3d/tmp/TriangleExample.h \
