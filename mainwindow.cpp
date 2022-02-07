@@ -5,6 +5,8 @@
 
 #include <QDebug>
 
+#include <app/OpenFileUsecase.h>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -47,9 +49,11 @@ void MainWindow::on_actionOpen_triggered()
         filenames = dialog.selectedFiles();
     }
 
-    QMessageBox msgBox;
-    msgBox.setText(filenames.at(0));
-    msgBox.exec();
+    qDebug() << "Open file " << filenames.at(0);
+
+    OpenFileUsecase openFileUsecase;
+
+    openFileUsecase.run("C:\\Users\\luantm\\Downloads\\zurich.pts", true, true, true, true, true);
 }
 
 

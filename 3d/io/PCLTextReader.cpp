@@ -11,13 +11,14 @@ void PCLTextReader::open(std::string filePath)
     this->infile.open(filePath);
 }
 
-float *PCLTextReader::next(unsigned int count)
+float *PCLTextReader::next(unsigned int count, unsigned int &number_of_points)
 {
     std::string line;
 
     float* vertices;
 
     bool no_data = true;
+    number_of_points = 0;
     for (int i = 0; i < count; i++) {
         if (std::getline(this->infile, line)) {
             if (no_data) {
@@ -36,6 +37,8 @@ float *PCLTextReader::next(unsigned int count)
             *(vertices + (3 * i + 0)) = x;
             *(vertices + (3 * i + 1)) = y;
             *(vertices + (3 * i + 2)) = z;
+
+            number_of_points = i;
         } else {
             break;
         }

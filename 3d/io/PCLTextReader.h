@@ -13,7 +13,7 @@ public:
 
     void open(std::string filePath);
 
-    float* next(unsigned int count);
+    float* next(unsigned int buck_size, unsigned int &number_of_points);
 
     void close();
 };

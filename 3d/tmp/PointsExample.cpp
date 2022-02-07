@@ -64,7 +64,8 @@ void PointsExample::setup() {
     qDebug() << "Opened text file";
     while(true) {
         unsigned int buck_size = 1000;
-        float* points = textReader->next(buck_size);
+        unsigned int return_number_of_points = 0;
+        float* points = textReader->next(buck_size, return_number_of_points);
 
         qDebug() << "1000...";
         if (points == nullptr) { break; }

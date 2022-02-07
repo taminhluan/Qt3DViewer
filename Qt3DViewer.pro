@@ -11,10 +11,15 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    3d/geometry/SphereGeometry.cpp \
     3d/io/BinReader.cpp \
     3d/io/BinWriter.cpp \
     3d/io/LasReader.cpp \
     3d/io/PCLTextReader.cpp \
+    3d/material/BasicMaterial.cpp \
+    3d/renderer/PCLRenderer.cpp \
+    3d/renderer/opengl/OpenGLBindingState.cpp \
+    3d/renderer/opengl/OpenGLBufferRenderer.cpp \
     3d/tmp/CubeExample.cpp \
     3d/tmp/PointsExample.cpp \
     3d/tmp/TriangleExample.cpp \
@@ -22,16 +27,26 @@ SOURCES += \
     OpenGLWidget.cpp \
     PerspectiveCamera.cpp \
     Speaker.cpp \
+    app/OpenFileUsecase.cpp \
     listenerimpl.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    3d/core/MeshNode.h \
     3d/core/Object3D.h \
+    3d/core/PCLNode.h \
+    3d/geometry/PCLGeometry.h \
+    3d/geometry/SphereGeometry.h \
     3d/io/BinReader.h \
     3d/io/BinWriter.h \
     3d/io/LasReader.h \
     3d/io/PCLTextReader.h \
+    3d/material/BasicMaterial.h \
+    3d/renderer/PCLRenderer.h \
+    3d/renderer/Renderer.h \
+    3d/renderer/opengl/OpenGLBindingState.h \
+    3d/renderer/opengl/OpenGLBufferRenderer.h \
     3d/tmp/CubeExample.h \
     3d/tmp/PointsExample.h \
     3d/tmp/TriangleExample.h \
@@ -39,6 +54,7 @@ HEADERS += \
     OpenGLWidget.h \
     PerspectiveCamera.h \
     Speacker.h \
+    app/OpenFileUsecase.h \
     listenerimpl.h \
     mainwindow.h \
 
