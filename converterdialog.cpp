@@ -24,6 +24,7 @@ void ConverterDialog::on_btnConvert_clicked()
     Converter converter;
     converter.convert(inputPath, outputPath);
 
+
     qDebug() << "Converted Successfully";
     QMessageBox msgBox;
     msgBox.setText("Converted Successfully.");

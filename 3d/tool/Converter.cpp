@@ -19,7 +19,9 @@ void Converter::convert(std::string inputPath, std::string outputPath) {
 
             if (points == nullptr) { break; }
             binWriter->write(points, return_number_of_points);
-
         }
+
+        textReader->close();
+        binWriter->close();
     }
 }
