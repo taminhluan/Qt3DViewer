@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include "PerspectiveCamera.h"
 
+#include "3d/tmp/Drawable.h"
+
 #include "3d/tmp/TriangleExample.h"
 #include "3d/tmp/PointsExample.h"
 #include "3d/tmp/CubeExample.h"
@@ -23,9 +25,14 @@ private:
 
     QOpenGLFunctions_3_3_Core *f;
 
-    TriangleExample* triangleExample;
-    PointsExample* pointsExample;
-    CubeExample* cubeExample;
+    Drawable* triangleExample;
+    Drawable* pointsExample;
+    Drawable* cubeExample;
+
+    bool is_needed_draw_triangle_example = false;
+    bool is_needed_draw_points_example = false;
+    bool is_needed_draw_cube_example = false;
+
 
 public:
     explicit OpenGLWidget(QWidget *parent = nullptr);
@@ -37,6 +44,10 @@ public:
     float background_color_blue = 0;
 
     PerspectiveCamera *camera;
+
+    void setupAndRunTriangleExample();
+    void setupAndRunPointsExample();
+    void setupAndRunCubeExample();
 
 public slots:
     void onCameraChanged();

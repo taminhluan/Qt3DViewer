@@ -6,6 +6,12 @@
 #include <QDebug>
 
 #include <app/OpenFileUsecase.h>
+#include "3d/io/BinWriter.h"
+#include "3d/io/BinReader.h"
+#include <iostream>
+
+#include "3d/tool/Converter.h"
+#include "converterdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -30,6 +36,40 @@ MainWindow::MainWindow(QWidget *parent)
 
     // we need QWidget*
     setCentralWidget(openGLWidget);
+
+    { // test io/bin read/write
+//        BinWriter binWriter;
+//        binWriter.open("abc.bin");
+//        binWriter.write(NULL, 0);
+//        binWriter.close();
+//        qDebug() << "Write to a file abc.bin";
+//        qDebug() << "Reading file abc.bin";
+
+//        BinReader binReader;
+//        binReader.open("abc.bin");
+//        binReader.next(0);
+//        binReader.close();
+    }
+
+    { // test converter
+          // Converter converter;
+          // converter.convert("", "");
+    }
+
+    { // test bin reader
+//        BinReader binReader;
+//        binReader.open("C:\\Users\\luantm\\Downloads\\zurich.bin");
+//        int returnNPoints;
+//        float *first1000Points = binReader.next(1000, returnNPoints);
+//        qDebug() << first1000Points[0];
+//        qDebug() << first1000Points[1];
+//        qDebug() << first1000Points[2];
+
+//        qDebug() << "-----------------";
+//        qDebug() << first1000Points[0];
+//        qDebug() << first1000Points[1];
+//        qDebug() << first1000Points[2];
+    }
 }
 
 MainWindow::~MainWindow()
@@ -146,5 +186,36 @@ void MainWindow::on_pushButtonUpdateCamera_clicked()
     openGLWidget->camera->m_far = cameraFar;
 
     openGLWidget->camera->updateProjectionMatrix();
+}
+
+
+
+// EXAMPLEs
+void MainWindow::on_btnTriangleExample_clicked()
+{
+    ui->statusbar->showMessage("Open triangle example");
+    openGLWidget->setupAndRunTriangleExample();
+}
+
+
+void MainWindow::on_btnPointExample_clicked()
+{
+    ui->statusbar->showMessage("Open points example");
+    openGLWidget->setupAndRunPointsExample();
+}
+
+
+void MainWindow::on_btnCubeExample_clicked()
+{
+    ui->statusbar->showMessage("Open cube example");
+    openGLWidget->setupAndRunCubeExample();
+}
+
+// end EXAMPLEs
+
+void MainWindow::on_actionConverter_triggered()
+{
+    ConverterDialog dialog;
+    dialog.exec();
 }
 

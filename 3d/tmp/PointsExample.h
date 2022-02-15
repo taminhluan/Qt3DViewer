@@ -4,9 +4,11 @@
 #include <QOpenGLFunctions_3_3_Core>
 #include <QOpenGLShaderProgram>
 #include "PerspectiveCamera.h"
+#include "Drawable.h"
+
 #include <vector>
 
-class PointsExample {
+class PointsExample: public Drawable {
 private:
     std::vector<unsigned int> VAOs;
 

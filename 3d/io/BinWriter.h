@@ -1,8 +1,13 @@
 #ifndef BINWRITER_H
 #define BINWRITER_H
 #include <string>
+#include <sstream>
+#include <fstream>
 
 class BinWriter {
+private:
+    std::ofstream outputFile;
+
 public:
     BinWriter();
 

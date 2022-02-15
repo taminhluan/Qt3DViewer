@@ -23,11 +23,13 @@ SOURCES += \
     3d/tmp/CubeExample.cpp \
     3d/tmp/PointsExample.cpp \
     3d/tmp/TriangleExample.cpp \
+    3d/tool/Converter.cpp \
     Listener.cpp \
     OpenGLWidget.cpp \
     PerspectiveCamera.cpp \
     Speaker.cpp \
     app/OpenFileUsecase.cpp \
+    converterdialog.cpp \
     listenerimpl.cpp \
     main.cpp \
     mainwindow.cpp
@@ -48,17 +50,22 @@ HEADERS += \
     3d/renderer/opengl/OpenGLBindingState.h \
     3d/renderer/opengl/OpenGLBufferRenderer.h \
     3d/tmp/CubeExample.h \
+    3d/tmp/Drawable.h \
     3d/tmp/PointsExample.h \
     3d/tmp/TriangleExample.h \
+    3d/tool/Converter.h \
+    3d/util/PathUtil.h \
     Listener.h \
     OpenGLWidget.h \
     PerspectiveCamera.h \
     Speacker.h \
     app/OpenFileUsecase.h \
+    converterdialog.h \
     listenerimpl.h \
     mainwindow.h \
 
 FORMS += \
+    converterdialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.

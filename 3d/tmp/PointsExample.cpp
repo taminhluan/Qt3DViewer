@@ -3,6 +3,7 @@
 #include <string>
 
 #include "3d/io/PCLTextReader.h"
+#include "3d/io/BinReader.h"
 
 PointsExample::PointsExample(QOpenGLFunctions_3_3_Core *f, PerspectiveCamera *camera) {
     this->f = f;
@@ -58,8 +59,12 @@ void PointsExample::setup() {
 
 
 
-    PCLTextReader* textReader = new PCLTextReader();
-    textReader->open("C:\\Users\\luantm\\Downloads\\zurich.pts");
+    // SHOULD unfocus to paintGL update
+//    PCLTextReader* textReader = new PCLTextReader(); // 15s to load text file, 15s
+//    textReader->open("C:\\Users\\luantm\\Downloads\\zurich.pts");
+
+    BinReader* textReader = new BinReader(); // <1s
+    textReader->open("C:\\Users\\luantm\\Downloads\\zurich.bin");
 
     qDebug() << "Opened text file";
     while(true) {
@@ -67,8 +72,7 @@ void PointsExample::setup() {
         unsigned int return_number_of_points = 0;
         float* points = textReader->next(buck_size, return_number_of_points);
 
-        qDebug() << "1000...";
-        if (points == nullptr) { break; }
+        if (points == nullptr || return_number_of_points == 0) { break; }
 
         // vao, vbo
         unsigned int VAO, VBO;
@@ -85,6 +89,8 @@ void PointsExample::setup() {
 
         VAOs.push_back(VAO);
     }
+
+    qDebug() << "Closed text file";
     textReader->close();
 }
 

@@ -9,6 +9,7 @@
 
 // constructor
 OpenGLWidget::OpenGLWidget(QWidget *parent): QOpenGLWidget(parent) {
+
 }
 
 void OpenGLWidget::setBackgroundColor(float red, float green, float blue) {
@@ -47,7 +48,8 @@ void OpenGLWidget::initializeGL() {
 //    this->triangleExample->setup();
 
     this->pointsExample = new PointsExample(f, camera);
-//    this->pointsExample->setup();
+    // this->pointsExample->setup();
+
     this->cubeExample = new CubeExample(f);
 }
 
@@ -60,8 +62,18 @@ void OpenGLWidget::paintGL() {
     f->glClearColor(this->background_color_red, this->background_color_green, this->background_color_blue, 1.0f);
     f->glClear(GL_COLOR_BUFFER_BIT);
 
+    if (this->is_needed_draw_cube_example) {
+        this->cubeExample->draw();
+    }
+    if (this->is_needed_draw_points_example) {
+        this->pointsExample->draw();
+    }
+    if (this->is_needed_draw_triangle_example) {
+        this->triangleExample->draw();
+    }
+
 //    this->triangleExample->draw();
-    this->pointsExample->draw();
+//    this->pointsExample->draw();
 }
 
 void OpenGLWidget::onCameraChanged() {
@@ -70,3 +82,21 @@ void OpenGLWidget::onCameraChanged() {
     emit cameraChanged();
 }
 
+// EXAMPLES
+void OpenGLWidget::setupAndRunTriangleExample() {
+    this->is_needed_draw_triangle_example = true;
+    this->triangleExample->setup();
+    this->update();
+}
+
+void OpenGLWidget::setupAndRunPointsExample() {
+    this->is_needed_draw_points_example  = true;
+    this->update();
+}
+
+void OpenGLWidget::setupAndRunCubeExample() {
+    this->is_needed_draw_cube_example = true;
+    this->cubeExample->setup();
+    this->update();
+}
+// end EXAMPLES

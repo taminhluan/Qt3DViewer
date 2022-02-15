@@ -4,8 +4,9 @@
 #include <QOpenGLFunctions_3_3_Core>
 #include <QOpenGLShaderProgram>
 #include "PerspectiveCamera.h"
+#include "3d/tmp/Drawable.h"
 
-class TriangleExample {
+class TriangleExample: public Drawable {
 private:
     unsigned int VBO, VAO;
 

@@ -30,6 +30,14 @@ private slots:
 
     void on_pushButtonUpdateCamera_clicked();
 
+    void on_btnTriangleExample_clicked();
+
+    void on_btnPointExample_clicked();
+
+    void on_btnCubeExample_clicked();
+
+    void on_actionConverter_triggered();
+
 private:
     Ui::MainWindow *ui;
 
