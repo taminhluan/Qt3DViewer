@@ -211,6 +211,11 @@ void MainWindow::on_btnCubeExample_clicked()
     openGLWidget->setupAndRunCubeExample();
 }
 
+void MainWindow::on_btnSamplePointExample_clicked()
+{
+    ui->statusbar->showMessage("Open sample points example");
+    openGLWidget->setupAndRunSamplePointsExample();
+}
 // end EXAMPLEs
 
 void MainWindow::on_actionConverter_triggered()
@@ -218,4 +223,7 @@ void MainWindow::on_actionConverter_triggered()
     ConverterDialog dialog;
     dialog.exec();
 }
+
+
+
 

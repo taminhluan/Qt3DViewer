@@ -85,18 +85,23 @@ void OpenGLWidget::onCameraChanged() {
 // EXAMPLES
 void OpenGLWidget::setupAndRunTriangleExample() {
     this->is_needed_draw_triangle_example = true;
-    this->triangleExample->setup();
     this->update();
 }
 
 void OpenGLWidget::setupAndRunPointsExample() {
+    this->pointsExample->path = "C:\\Users\\luantm\\Downloads\\zurich.bin";
     this->is_needed_draw_points_example  = true;
+    this->update();
+}
+
+void OpenGLWidget::setupAndRunSamplePointsExample() {
+    this->pointsExample->path = "C:\\Users\\luantm\\Downloads\\sample.bin";
+    this->is_needed_draw_points_example = true;
     this->update();
 }
 
 void OpenGLWidget::setupAndRunCubeExample() {
     this->is_needed_draw_cube_example = true;
-    this->cubeExample->setup();
     this->update();
 }
 // end EXAMPLES

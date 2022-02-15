@@ -4,6 +4,7 @@
 #include <QOpenGLFunctions_3_3_Core>
 #include <QOpenGLShaderProgram>
 #include "PerspectiveCamera.h"
+#include <string>
 
 class Drawable {
 private:
@@ -17,6 +18,7 @@ private:
 public:
     // bool is_need_setup = true;
     // Drawable(QOpenGLFunctions_3_3_Core *f, PerspectiveCamera *camera);
+    std::string path;
 
     /**
      * @brief setup()

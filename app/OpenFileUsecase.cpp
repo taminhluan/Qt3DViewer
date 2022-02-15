@@ -1,6 +1,8 @@
 #include "app/OpenFileUsecase.h"
 
 #include <3d/io/PCLTextReader.h>
+#include <3d/io/BinReader.h>
+#include "3d/io/BinWriter.h"
 
 #include <QDebug>
 #include <limits>
@@ -22,10 +24,7 @@ void OpenFileUsecase::write_point_to_sample_data(float x, float y, float z)
 void OpenFileUsecase::run(std::string filepath, bool should_calculate_bounding_box, bool should_write_sample_data, bool should_visualize_sample_data, bool should_make_LOD, bool should_visualize_LOD)
 {
     qDebug() << "OpenFileUsecase::run";
-
-    { // simple visualize
-
-    }
+    qDebug() << QString().fromStdString(filepath);
 
     { //
         float bb_min_x = std::numeric_limits<float>::max();
@@ -35,17 +34,22 @@ void OpenFileUsecase::run(std::string filepath, bool should_calculate_bounding_b
         float bb_max_y = std::numeric_limits<float>::min();
         float bb_max_z = std::numeric_limits<float>::min();
 
-        PCLTextReader* textReader = new PCLTextReader();
-        textReader->open(filepath);
+        BinReader* reader = new BinReader();
+        reader->open("C:\\Users\\luantm\\Downloads\\zurich.bin");
+
+        BinWriter* sampleWriter = new BinWriter();
+        sampleWriter->open("C:\\Users\\luantm\\Downloads\\sample.bin");
 
         qDebug() << "Opened text file";
 
         int count = 0;
         while(true) {
             unsigned int buck_size = 1000;
-
             unsigned int return_number_of_points = 0;
-            float* points = textReader->next(buck_size, return_number_of_points);
+            float* points = reader->next(buck_size, return_number_of_points);
+            qDebug() << points[0];
+            qDebug() << points[1];
+            qDebug() << points[2];
 
             if (return_number_of_points == 0) {
                 break;
@@ -70,7 +74,12 @@ void OpenFileUsecase::run(std::string filepath, bool should_calculate_bounding_b
 
                 if (should_write_sample_data) {
                     if (i%100 == 0) {
-                        this->write_point_to_sample_data(x, y, z);
+                        float *data = new float[3];
+                        data[0] = x;
+                        data[1] = y;
+                        data[2] = z;
+                        qDebug() << data[0] << " " << data[1] << " " << data[2];
+                        sampleWriter->write(data, 1);
                     }
                 }
             }
@@ -82,6 +91,6 @@ void OpenFileUsecase::run(std::string filepath, bool should_calculate_bounding_b
 
         qDebug() << "Wrote sample data: " << QString::fromStdString(this->sample_file_path);
 
-        textReader->close();
+        reader->close();
     }
 }

@@ -48,6 +48,7 @@ public:
     void setupAndRunTriangleExample();
     void setupAndRunPointsExample();
     void setupAndRunCubeExample();
+    void setupAndRunSamplePointsExample();
 
 public slots:
     void onCameraChanged();

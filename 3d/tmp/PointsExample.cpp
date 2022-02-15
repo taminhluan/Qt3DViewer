@@ -63,14 +63,18 @@ void PointsExample::setup() {
 //    PCLTextReader* textReader = new PCLTextReader(); // 15s to load text file, 15s
 //    textReader->open("C:\\Users\\luantm\\Downloads\\zurich.pts");
 
-    BinReader* textReader = new BinReader(); // <1s
-    textReader->open("C:\\Users\\luantm\\Downloads\\zurich.bin");
+    BinReader* reader = new BinReader(); // <1s
+//    reader->open("C:\\Users\\luantm\\Downloads\\zurich.bin");
+    reader->open(path);
 
     qDebug() << "Opened text file";
     while(true) {
         unsigned int buck_size = 1000;
         unsigned int return_number_of_points = 0;
-        float* points = textReader->next(buck_size, return_number_of_points);
+        float* points = reader->next(buck_size, return_number_of_points);
+        qDebug() << points[0];
+        qDebug() << points[1];
+        qDebug() << points[2];
 
         if (points == nullptr || return_number_of_points == 0) { break; }
 
@@ -91,7 +95,7 @@ void PointsExample::setup() {
     }
 
     qDebug() << "Closed text file";
-    textReader->close();
+    reader->close();
 }
 
 void PointsExample::draw() {

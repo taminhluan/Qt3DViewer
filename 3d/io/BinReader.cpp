@@ -30,9 +30,11 @@ float *BinReader::next(unsigned int count, unsigned int &number_of_points)
     {
         if (! this->infile.eof()) {
             this->infile.read((char *) &result[i], sizeof(float));
-            number_of_points ++;
         } else {
             break;
+        }
+        if (i % 3 == 0) {
+            number_of_points ++;
         }
     }
     return result;

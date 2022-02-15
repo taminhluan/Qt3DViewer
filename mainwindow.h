@@ -38,6 +38,8 @@ private slots:
 
     void on_actionConverter_triggered();
 
+    void on_btnSamplePointExample_clicked();
+
 private:
     Ui::MainWindow *ui;
 
