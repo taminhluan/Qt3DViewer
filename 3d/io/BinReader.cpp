@@ -26,16 +26,17 @@ float *BinReader::next(unsigned int count, unsigned int &number_of_points)
     float *result;
     number_of_points = 0;
     result = new float[3 * count];
-    for (int i = 0; i < 3 * count; i++)
+    for (int i = 0; i < 3 * count; i+=3)
     {
         if (! this->infile.eof()) {
             this->infile.read((char *) &result[i], sizeof(float));
+            this->infile.read((char *) &result[i + 1], sizeof(float));
+            this->infile.read((char *) &result[i + 2], sizeof(float));
+            number_of_points ++;
         } else {
             break;
         }
-        if (i % 3 == 0) {
-            number_of_points ++;
-        }
+
     }
     return result;
 }

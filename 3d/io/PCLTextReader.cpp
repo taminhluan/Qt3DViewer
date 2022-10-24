@@ -1,6 +1,6 @@
 #include "3d/io/PCLTextReader.h"
 #include <iostream>
-
+#include <QDebug>
 PCLTextReader::PCLTextReader()
 {
 
@@ -38,7 +38,7 @@ float *PCLTextReader::next(unsigned int count, unsigned int &number_of_points)
             *(vertices + (3 * i + 1)) = y;
             *(vertices + (3 * i + 2)) = z;
 
-            number_of_points = i;
+            number_of_points += 1;
         } else {
             break;
         }

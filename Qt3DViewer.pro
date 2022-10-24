@@ -24,11 +24,13 @@ SOURCES += \
     3d/tmp/PointsExample.cpp \
     3d/tmp/TriangleExample.cpp \
     3d/tool/Converter.cpp \
+    3d/tool/Informator.cpp \
     Listener.cpp \
     OpenGLWidget.cpp \
     PerspectiveCamera.cpp \
     Speaker.cpp \
     app/OpenFileUsecase.cpp \
+    app/ui/PropertiesPanel.cpp \
     converterdialog.cpp \
     listenerimpl.cpp \
     main.cpp \
@@ -54,12 +56,14 @@ HEADERS += \
     3d/tmp/PointsExample.h \
     3d/tmp/TriangleExample.h \
     3d/tool/Converter.h \
+    3d/tool/Informator.h \
     3d/util/PathUtil.h \
     Listener.h \
     OpenGLWidget.h \
     PerspectiveCamera.h \
     Speacker.h \
     app/OpenFileUsecase.h \
+    app/ui/PropertiesPanel.h \
     converterdialog.h \
     listenerimpl.h \
     mainwindow.h \

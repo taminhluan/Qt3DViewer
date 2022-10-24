@@ -74,6 +74,11 @@ void OpenGLWidget::paintGL() {
 
 //    this->triangleExample->draw();
 //    this->pointsExample->draw();
+
+    for (int i = 0; i < drawables.size(); i++) {
+        Drawable &drawable = drawables.at(i);
+        drawable.draw();
+    }
 }
 
 void OpenGLWidget::onCameraChanged() {

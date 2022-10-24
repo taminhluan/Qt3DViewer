@@ -182,7 +182,18 @@
    <attribute name="dockWidgetArea">
     <number>2</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents_2"/>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <widget class="QPlainTextEdit" name="txtProperties">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>291</width>
+       <height>231</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QDockWidget" name="dockWidgetScene">
    <property name="windowTitle">
@@ -397,6 +408,12 @@
      </widget>
     </widget>
    </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetConsole">
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_5"/>
   </widget>
   <action name="actionOpen">
    <property name="icon">

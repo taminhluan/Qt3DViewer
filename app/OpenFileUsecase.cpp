@@ -24,21 +24,23 @@ void OpenFileUsecase::write_point_to_sample_data(float x, float y, float z)
 void OpenFileUsecase::run(std::string filepath, bool should_calculate_bounding_box, bool should_write_sample_data, bool should_visualize_sample_data, bool should_make_LOD, bool should_visualize_LOD)
 {
     qDebug() << "OpenFileUsecase::run";
-    qDebug() << QString().fromStdString(filepath);
+    qDebug() << "Filepath: " << QString().fromStdString(filepath);
+    std::string outputSamplePath = "C:\\Users\\luantm\\Downloads\\sample.bin";
+    int ratio = 100;
 
-    { //
-        float bb_min_x = std::numeric_limits<float>::max();
-        float bb_min_y = std::numeric_limits<float>::max();
-        float bb_min_z = std::numeric_limits<float>::max();
-        float bb_max_x = std::numeric_limits<float>::min();
-        float bb_max_y = std::numeric_limits<float>::min();
-        float bb_max_z = std::numeric_limits<float>::min();
-
+    float bb_min_x = std::numeric_limits<float>::max();
+    float bb_min_y = std::numeric_limits<float>::max();
+    float bb_min_z = std::numeric_limits<float>::max();
+    float bb_max_x = std::numeric_limits<float>::min();
+    float bb_max_y = std::numeric_limits<float>::min();
+    float bb_max_z = std::numeric_limits<float>::min();
+    // sampling, calculate bounding box
+    {
         BinReader* reader = new BinReader();
-        reader->open("C:\\Users\\luantm\\Downloads\\zurich.bin");
+        reader->open(filepath);
 
         BinWriter* sampleWriter = new BinWriter();
-        sampleWriter->open("C:\\Users\\luantm\\Downloads\\sample.bin");
+        sampleWriter->open(outputSamplePath);
 
         qDebug() << "Opened text file";
 
@@ -47,9 +49,7 @@ void OpenFileUsecase::run(std::string filepath, bool should_calculate_bounding_b
             unsigned int buck_size = 1000;
             unsigned int return_number_of_points = 0;
             float* points = reader->next(buck_size, return_number_of_points);
-            qDebug() << points[0];
-            qDebug() << points[1];
-            qDebug() << points[2];
+
 
             if (return_number_of_points == 0) {
                 break;
@@ -63,6 +63,9 @@ void OpenFileUsecase::run(std::string filepath, bool should_calculate_bounding_b
                 float x = points[ i * 3 + 0];
                 float y = points[ i * 3 + 1];
                 float z = points[ i * 3 + 2];
+                if (x < -1000000) {
+                    continue;
+                }
 
                 if (bb_min_x > x) { bb_min_x = x; }
                 if (bb_min_y > y) { bb_min_y = y; }
@@ -73,12 +76,12 @@ void OpenFileUsecase::run(std::string filepath, bool should_calculate_bounding_b
                 if (bb_max_z < z) { bb_max_z = z; }
 
                 if (should_write_sample_data) {
-                    if (i%100 == 0) {
+                    if (i%ratio == 0) {
                         float *data = new float[3];
                         data[0] = x;
                         data[1] = y;
                         data[2] = z;
-                        qDebug() << data[0] << " " << data[1] << " " << data[2];
+                        // qDebug() << data[0] << " " << data[1] << " " << data[2];
                         sampleWriter->write(data, 1);
                     }
                 }
@@ -92,5 +95,22 @@ void OpenFileUsecase::run(std::string filepath, bool should_calculate_bounding_b
         qDebug() << "Wrote sample data: " << QString::fromStdString(this->sample_file_path);
 
         reader->close();
+
+        { // write bbox
+            qDebug() << "MIN: " << bb_min_x << "," << bb_min_y << "," << bb_min_z;
+            qDebug() << "MAX: " << bb_max_x << "," << bb_max_y << "," << bb_max_z;
+        }
+    }
+
+    // write bounding box to file
+    {
+        //TODO: write bounding box to file
+    }
+
+    // visualize sample file:
+    {
+        //TODO: visualize 3D model
+        //TODO: visualize PCL
+
     }
 }

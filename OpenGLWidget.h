@@ -1,6 +1,8 @@
 #ifndef OPENGLWIDGET_H
 #define OPENGLWIDGET_H
 
+#include <vector>
+
 #include <QOpenGLWidget>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFunctions_3_3_Core>
@@ -12,6 +14,8 @@
 #include "3d/tmp/TriangleExample.h"
 #include "3d/tmp/PointsExample.h"
 #include "3d/tmp/CubeExample.h"
+
+
 
 /**
  * @brief The OpenGLWidget class extend from QOpenGLWidget
@@ -33,7 +37,7 @@ private:
     bool is_needed_draw_points_example = false;
     bool is_needed_draw_cube_example = false;
 
-
+    std::vector<Drawable> drawables;
 public:
     explicit OpenGLWidget(QWidget *parent = nullptr);
     void setBackgroundColor(float red, float green, float blue);

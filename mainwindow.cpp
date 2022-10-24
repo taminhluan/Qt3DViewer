@@ -70,6 +70,11 @@ MainWindow::MainWindow(QWidget *parent)
 //        qDebug() << first1000Points[1];
 //        qDebug() << first1000Points[2];
     }
+
+    { // test plain text
+        ui->txtProperties->setPlainText("Everything is working fine\nNew line also work");
+
+    }
 }
 
 MainWindow::~MainWindow()
@@ -93,7 +98,7 @@ void MainWindow::on_actionOpen_triggered()
 
     OpenFileUsecase openFileUsecase;
 
-    openFileUsecase.run("C:\\Users\\luantm\\Downloads\\zurich.pts", true, true, true, true, true);
+    openFileUsecase.run(filenames.at(0).toStdString(), true, true, true, true, true);
 }
 
 
